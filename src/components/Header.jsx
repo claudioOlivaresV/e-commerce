@@ -22,7 +22,7 @@ export default class Header extends Component {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active mr-3">
-                <a class="nav-link" to="/">Iniciar Session</a>
+               Iniciar Session
               </li>
 
               <li className="nav-item active">
