@@ -9,13 +9,13 @@ export default class Recommended extends Component {
                 <Menu />
                 <div className="row my-5">
                     <div className="col-12 col-lg-4">
-                       <RecommendedDetail />
+                       <RecommendedDetail className="w-100" />
                     </div>
                     <div className="col-12 col-lg-4">
-                      <RecommendedDetail />
+                      <RecommendedDetail className="w-100" />
                     </div>
                     <div className="col-12 col-lg-4">
-                       <RecommendedDetail />
+                       <RecommendedDetail className="w-100" />
                     </div>
                 </div>
                 

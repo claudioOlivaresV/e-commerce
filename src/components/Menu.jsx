@@ -122,7 +122,7 @@ export default function SearchAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className="bg-light text-dark shadow-none mt-5">
         <Toolbar>
           <IconButton
             edge="start"
