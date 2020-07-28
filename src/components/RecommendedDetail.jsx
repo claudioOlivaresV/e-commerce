@@ -7,10 +7,17 @@ import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import Button from '@material-ui/core/Button';
+import clsx from 'clsx';
+import Rating from '@material-ui/lab/Rating';
+
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    marginTop: "15px"
   },
   media: {
     height: 0,
@@ -19,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
+    position: 'absolute',
+    right: '30px',
+   
   },
   expandOpen: {
     transform: 'rotate(180deg)',
@@ -30,9 +37,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: red[500],
   },
 }));
+const img = 'https://i5.walmartimages.com/asr/f3077845-8786-4bfa-ba98-482f06af91a2_1.2bdade6ddc986cbd875304164a98aa06.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'
 
 export default function RecipeReviewCard() {
   const classes = useStyles();
+  const [value, setValue] = React.useState(2);
+
 
 
 
@@ -40,7 +50,7 @@ export default function RecipeReviewCard() {
     <Card className={classes.root}>
     <CardMedia
       className={classes.media}
-      image="/static/images/cards/paella.jpg"
+      image = {img}
       title="Paella dish"
     />
     <CardContent>
@@ -49,13 +59,29 @@ export default function RecipeReviewCard() {
         together with your guests. Add 1 cup of frozen peas along with the
         mussels, if you like.
       </Typography>
+      <Rating
+          name="simple-controlled"
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        />
     </CardContent>
     <CardActions disableSpacing>
-      <IconButton aria-label="add to favorites">
-      </IconButton>
-      <IconButton aria-label="share">
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon />
+        </IconButton>
+        <IconButton aria-label="share">
+          <ShareIcon />
+        </IconButton>
+
+        <Button
+         className={clsx(classes.expand, {
         
-      </IconButton>
+        })}
+         variant="contained" color="secondary" >
+          Comprar
+         </Button> 
     </CardActions>
   </Card>
   );

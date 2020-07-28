@@ -10,6 +10,17 @@ import Menu from "@material-ui/core/Menu";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Badge from '@material-ui/core/Badge';
 
+// dialog
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,6 +39,17 @@ export default function MenuAppBar() {
   const [auth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const [openModal, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose2 = () => {
+    setOpen(false);
+  };
 
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
@@ -36,6 +58,11 @@ export default function MenuAppBar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const startSession = () =>{
+    handleClose();
+    handleClickOpen();
+  }
 
   return (
     <div className={classes.root}>
@@ -82,13 +109,45 @@ export default function MenuAppBar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={startSession}>Iniciar Sessión</MenuItem>
+                {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
               </Menu>
             </div>
           )}
         </Toolbar>
       </AppBar>
+
+      <Dialog open={openModal} onClose={handleClose2} aria-labelledby="form-dialog-title" fullScreen={fullScreen}>
+        <DialogTitle id="form-dialog-title">Iniciar Sessión</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Bienvenido ingresa tu correo y contraseña
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Correo electrónico"
+            type="email"
+            fullWidth
+          />
+           <TextField
+            margin="dense"
+            id="name"
+            label="Contraseña"
+            type="password"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose2} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose2} color="primary">
+            Subscribe
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

@@ -8,6 +8,7 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 
+
 import clsx from 'clsx';
 
 import Drawer from '@material-ui/core/Drawer';
@@ -22,6 +23,10 @@ import MailIcon from '@material-ui/icons/Mail';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    backgroundColor: '#f5f5f5',
+    boxShadow: 'none',
+    marginTop: '20px',
+    color: '#424242'
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -122,7 +127,7 @@ export default function SearchAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" className="bg-light text-dark shadow-none mt-5">
+      <AppBar position="static" className={classes.root}>
         <Toolbar>
           <IconButton
             edge="start"
