@@ -7,11 +7,13 @@ import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import ShareIcon from '@material-ui/icons/Share';
 import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
 import Rating from '@material-ui/lab/Rating';
+import Tooltip from '@material-ui/core/Tooltip';
+
 
 
 
@@ -68,12 +70,16 @@ export default function RecipeReviewCard() {
         />
     </CardContent>
     <CardActions disableSpacing>
+    <Tooltip title="Ver Detalle">
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          <VisibilityIcon />
         </IconButton>
+    </Tooltip>
+    <Tooltip title="Compartir">
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
+    </Tooltip>
 
         <Button
          className={clsx(classes.expand, {

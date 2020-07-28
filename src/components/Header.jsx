@@ -10,6 +10,11 @@ import Menu from "@material-ui/core/Menu";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Badge from '@material-ui/core/Badge';
 
+import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
+
+
+
 // dialog
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -62,6 +67,12 @@ export default function MenuAppBar() {
   const startSession = () =>{
     handleClose();
     handleClickOpen();
+  }
+  const responseGoogle = (response) => {
+    console.log(response);
+  }
+  const responseFacebook = (response) => {
+    console.log(response);
   }
 
   return (
@@ -128,6 +139,7 @@ export default function MenuAppBar() {
             margin="dense"
             id="name"
             label="Correo electrónico"
+            variant="outlined"
             type="email"
             fullWidth
           />
@@ -136,15 +148,33 @@ export default function MenuAppBar() {
             id="name"
             label="Contraseña"
             type="password"
+            variant="outlined"
             fullWidth
           />
+           <GoogleLogin
+    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+    buttonText="Iniciar con Google"
+    onSuccess={responseGoogle}
+    onFailure={responseGoogle}
+    className="w-100 text-center my-3"
+    cookiePolicy={'single_host_origin'}
+  />
+   <FacebookLogin
+    appId="1088597931155576"
+    autoLoad={false}
+    fields="name,email,picture"
+    icon="fa-facebook"
+  
+    // onClick={componentClicked}
+    callback={responseFacebook} />
+
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose2} color="primary">
-            Cancel
+            Cancelar
           </Button>
-          <Button onClick={handleClose2} color="primary">
-            Subscribe
+          <Button onClick={handleClose2} variant="contained" color="secondary">
+            Iniciar Sessión
           </Button>
         </DialogActions>
       </Dialog>

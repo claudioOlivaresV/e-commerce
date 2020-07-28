@@ -7,7 +7,7 @@ export default class Carrusel extends Component {
       <div>
         <div
           id="carouselExampleCaptions"
-          className="carousel slide"
+          className="carousel slide mt-5"
           data-ride="carousel"
         >
           <ol className="carousel-indicators">
