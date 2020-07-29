@@ -21,7 +21,8 @@ import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "15px"
+    marginTop: "15px",
+    
   },
   media: {
     height: 0,

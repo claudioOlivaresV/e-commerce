@@ -25,6 +25,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+import { Link } from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
@@ -84,7 +85,7 @@ export default function MenuAppBar() {
           </Typography>
           {auth && (
             <div>
-              
+              <Link to="/carritoCompra">
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -96,6 +97,7 @@ export default function MenuAppBar() {
 
                 </Badge>
               </IconButton>
+              </Link>
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
