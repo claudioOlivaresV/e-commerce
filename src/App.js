@@ -1,16 +1,28 @@
 import React from "react";
 import "./App.css";
-import Header from "./components/Header";
-import Carrusel from "./components/Carrusel";
-import Recommended from "./components/Recommended";
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import Main from "./components/Main";
+import Home from "./components/Home";
+import Product from "./components/Product";
 
 
 function App() {
   return (
     <div className="App">
-      <Header className="container"/>
-      <Carrusel />
-      <Recommended />
+    
+      <BrowserRouter>
+      <Main>
+        <Switch>
+           <Route exact path="/" component={Home} />
+           <Route exact path="/producto" component={Product} />
+
+        </Switch>
+
+
+      </Main>
+      
+      </BrowserRouter>
+     
 
     </div>
   );

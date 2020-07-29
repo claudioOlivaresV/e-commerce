@@ -13,6 +13,8 @@ import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
 import Rating from '@material-ui/lab/Rating';
 import Tooltip from '@material-ui/core/Tooltip';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -70,11 +72,13 @@ export default function RecipeReviewCard() {
         />
     </CardContent>
     <CardActions disableSpacing>
+      <Link to="/producto">
     <Tooltip title="Ver Detalle">
         <IconButton aria-label="add to favorites">
           <VisibilityIcon />
         </IconButton>
     </Tooltip>
+      </Link>
     <Tooltip title="Compartir">
         <IconButton aria-label="share">
           <ShareIcon />

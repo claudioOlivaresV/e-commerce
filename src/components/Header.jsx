@@ -80,7 +80,7 @@ export default function MenuAppBar() {
       <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            E-commers
+            E-commerce
           </Typography>
           {auth && (
             <div>
