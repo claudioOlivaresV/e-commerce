@@ -46,9 +46,6 @@ export default function HorizontalLabelPositionBelowStepper() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
 
   
 
@@ -83,8 +80,8 @@ export default function HorizontalLabelPositionBelowStepper() {
       <div>
         {activeStep === steps.length ? (
           <div>
-            <Typography >All steps completed</Typography>
-            <Button onClick={handleReset}>Reset</Button>
+            <Typography >Tu compra fue completada</Typography>
+            
           </div>
         ) : (
           <div>
