@@ -8,6 +8,9 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import StepperThree from './StepperThree';
 import StepperTwo from './StepperTwo';
 import StepperOne from './StepperOne';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import HomeIcon from '@material-ui/icons/Home';
+import { Link } from 'react-router-dom';
 
 
 
@@ -15,7 +18,7 @@ import StepperOne from './StepperOne';
 
 
 function getSteps() {
-  return ['Select master blaster campaign settings', 'Create an ad group', 'Create an ad'];
+  return ['Productos', 'Tus Datos', 'Pago'];
 }
 
 function getStepContent(stepIndex) {
@@ -51,9 +54,22 @@ export default function HorizontalLabelPositionBelowStepper() {
 
   return (
     <div className="container margenNavbar mb-5 ">
+
+<Breadcrumbs aria-label="breadcrumb0" className="mt-5">
+
+     
+<Link color="inherit" to="/" >
+   <HomeIcon />   Home
+ </Link>
+
+ <Link color="inherit"  >
+     Carrito de compra
+ </Link>
+
+
+</Breadcrumbs>
   
-     <h3 className="text-left"> 
-     <ShoppingBasketIcon/> Mi compra</h3>
+    
     <div >
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
@@ -62,6 +78,8 @@ export default function HorizontalLabelPositionBelowStepper() {
           </Step>
         ))}
       </Stepper>
+      <h3 className="text-left mb-4"> 
+     <ShoppingBasketIcon/> Mi compra</h3>
       <div>
         {activeStep === steps.length ? (
           <div>
@@ -73,7 +91,7 @@ export default function HorizontalLabelPositionBelowStepper() {
             <Typography >{getStepContent(activeStep)}</Typography>
 
             
-            <div>
+            <div className="my-3">
               <Button
                 disabled={activeStep === 0}
                 onClick={handleBack}

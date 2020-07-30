@@ -137,7 +137,7 @@ export default function MenuAppBar() {
             Bienvenido ingresa tu correo y contraseña
           </DialogContentText>
           <TextField
-            autoFocus
+            
             margin="dense"
             id="name"
             label="Correo electrónico"

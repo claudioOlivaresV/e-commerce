@@ -13,7 +13,7 @@ export default class CarritoProduct extends Component {
   
     render() {
         return (
-            <div className="text-left">
+            <div className="text-left my-3">
                 <Card >
       <CardContent>
           <div className="row">
@@ -37,11 +37,12 @@ export default class CarritoProduct extends Component {
           InputLabelProps={{
             shrink: true,
           }}
+          className="mt-3"
           variant="outlined"
         />
 
               </div>
-              <div className="col-2 align-self-center p-2">
+              <div className="col-12 col-lg-2 text-center align-self-center p-2">
 
               <IconButton aria-label="delete" >
           <DeleteIcon fontSize="large" />

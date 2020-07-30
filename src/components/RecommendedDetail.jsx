@@ -14,10 +14,14 @@ import clsx from 'clsx';
 import Rating from '@material-ui/lab/Rating';
 import Tooltip from '@material-ui/core/Tooltip';
 import { Link } from 'react-router-dom';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 
 
-
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,11 +51,24 @@ const img = 'https://i5.walmartimages.com/asr/f3077845-8786-4bfa-ba98-482f06af91
 export default function RecipeReviewCard() {
   const classes = useStyles();
   const [value, setValue] = React.useState(2);
+  const [open, setOpen] = React.useState(false);
 
+  const openSnack =  () => {
+    setOpen(true);
+  }
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
 
+    setOpen(false);
+  };
 
 
   return (
+    <div>
+
+   
     <Card className={classes.root}>
     <CardMedia
       className={classes.media}
@@ -87,6 +104,7 @@ export default function RecipeReviewCard() {
     </Tooltip>
 
         <Button
+         onClick={openSnack}
          className={clsx(classes.expand, {
         
         })}
@@ -95,5 +113,16 @@ export default function RecipeReviewCard() {
          </Button> 
     </CardActions>
   </Card>
+
+<Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+<Alert onClose={handleClose} severity="success">
+  Producto agregado!
+</Alert>
+</Snackbar>
+</div>
+
   );
 }
+
+
+
