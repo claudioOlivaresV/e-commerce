@@ -157,10 +157,10 @@ export default function MenuAppBar() {
       </AppBar>
 
       <Dialog open={openModal} onClose={handleClose2} aria-labelledby="form-dialog-title" fullScreen={fullScreen}>
-        <DialogTitle id="form-dialog-title">Iniciar Sessión</DialogTitle>
+        <DialogTitle id="form-dialog-title">Iniciar Sessión </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Bienvenido ingresa tu correo y contraseña
+            Bienvenido ingrese su correo y contraseña
           </DialogContentText>
           <TextField
             
