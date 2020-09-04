@@ -12,6 +12,7 @@ import Badge from '@material-ui/core/Badge';
 
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
+import './styles/header.css';
 
 
 
@@ -26,6 +27,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
+import Tooltip from '@material-ui/core/Tooltip';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -46,6 +49,8 @@ export default function MenuAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const [openModal, setOpen] = React.useState(false);
+  const [openModalRegister, setOpenRegister] = React.useState(false);
+
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -55,6 +60,14 @@ export default function MenuAppBar() {
 
   const handleClose2 = () => {
     setOpen(false);
+  };
+
+  const handleClickOpenRegister = () => {
+    setOpenRegister(true)
+
+  }
+  const handleCloseRegister = () => {
+    setOpenRegister(false);
   };
 
   const handleMenu = event => {
@@ -69,6 +82,12 @@ export default function MenuAppBar() {
     handleClose();
     handleClickOpen();
   }
+  
+  const register = () =>{
+    handleClose();
+    handleClickOpenRegister();
+  }
+
   const responseGoogle = (response) => {
     console.log(response);
   }
@@ -85,8 +104,9 @@ export default function MenuAppBar() {
           </Typography>
           {auth && (
             <div>
+              <Tooltip title="Carrito de compra">
               <Link to="/carritoCompra">
-              <IconButton
+              <IconButton  className="header-icons"
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
@@ -98,7 +118,10 @@ export default function MenuAppBar() {
                 </Badge>
               </IconButton>
               </Link>
-              <IconButton
+                
+              </Tooltip>
+              <Tooltip title="Carrito de compra">
+              <IconButton className="header-icons"
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
@@ -107,6 +130,7 @@ export default function MenuAppBar() {
               >
                 <AccountCircle />
               </IconButton>
+              </Tooltip>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -123,7 +147,9 @@ export default function MenuAppBar() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={startSession}>Iniciar Sessión</MenuItem>
-                {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
+                <MenuItem onClick={register}>Regístrate</MenuItem>
+                
+  
               </Menu>
             </div>
           )}
@@ -177,6 +203,40 @@ export default function MenuAppBar() {
           </Button>
           <Button onClick={handleClose2} variant="contained" color="secondary">
             Iniciar Sessión
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={openModalRegister} onClose={handleCloseRegister} aria-labelledby="form-dialog-title" fullScreen={fullScreen}>
+        <DialogTitle id="form-dialog-title">Regístrate</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Bienvenido ingresa tu correo y contraseña
+          </DialogContentText>
+          <TextField
+            
+            margin="dense"
+            id="name"
+            label="Correo electrónico"
+            variant="outlined"
+            type="email"
+            fullWidth
+          />
+           <TextField
+            margin="dense"
+            id="name"
+            label="Contraseña"
+            type="password"
+            variant="outlined"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseRegister} color="primary">
+            Cancelar
+          </Button>
+          <Button onClick={handleCloseRegister} variant="contained" color="secondary">
+            Registrar
           </Button>
         </DialogActions>
       </Dialog>
