@@ -13,6 +13,11 @@ import Badge from '@material-ui/core/Badge';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import './styles/header.css';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Snackbar from '@material-ui/core/Snackbar';
+import CloseIcon from '@material-ui/icons/Close';
+
+
 
 
 
@@ -29,6 +34,8 @@ import { useTheme } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
 import Tooltip from '@material-ui/core/Tooltip';
 
+import { useFormik } from 'formik';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -44,10 +51,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function MenuAppBar() {
+
   const classes = useStyles();
   const [auth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const [spinner, setSpinner] = React.useState(false);
+  const [errorLogin, setErrorLogin] = React.useState(false);
+
   const [openModal, setOpen] = React.useState(false);
   const [openModalRegister, setOpenRegister] = React.useState(false);
 
@@ -94,6 +105,48 @@ export default function MenuAppBar() {
   const responseFacebook = (response) => {
     console.log(response);
   }
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    onSubmit: values => {
+      setSpinner(true)
+      if(values.email === "claudio@gmail.com" && values.password === "1234"){
+        
+        setTimeout(() => {
+          setSpinner(false)
+        }, 3000);
+        console.log('estas logeado');
+        const user = {
+          name: 'Claudio Olivares',
+          picture: 'https://randomuser.me/api/portraits/thumb/men/75.jpg',
+        }
+        sessionStorage.setItem("user", user);   
+      }else {
+        setTimeout(() => {
+          setSpinner(false)
+          setErrorLogin(true)
+        }, 3000);
+      }
+    },
+    validate: values => {
+      // values.email values.password
+      let errors = {}
+     
+      if (!values.email) {
+        errors.email = '(*) Correo Obligatorio';
+      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        errors.email = 'Invalid email address';
+      }
+      if (!values.password) {
+        errors.password = '(*) Contraseña Obligatoria';
+      } 
+
+      return errors;
+    }
+    
+  });
 
   return (
     <div className={classes.root}>
@@ -157,28 +210,66 @@ export default function MenuAppBar() {
       </AppBar>
 
       <Dialog open={openModal} onClose={handleClose2} aria-labelledby="form-dialog-title" fullScreen={fullScreen}>
+      
+      {spinner ? <LinearProgress /> : null}
+      <form onSubmit={formik.handleSubmit}>
         <DialogTitle id="form-dialog-title">Iniciar Sessión </DialogTitle>
         <DialogContent>
           <DialogContentText>
             Bienvenido ingrese su correo y contraseña
           </DialogContentText>
+     
           <TextField
             
             margin="dense"
-            id="name"
+            id="email"
+            name="email"
             label="Correo electrónico"
             variant="outlined"
             type="email"
             fullWidth
+            
+            onChange={formik.handleChange}
+            value={formik.values.email}
+            helperText= {formik.errors.email ? formik.errors.email : '(*) Campo obligatorio' }
+            error = {formik.errors.email ? true : false }
           />
+          
            <TextField
             margin="dense"
-            id="name"
+            id="password"
+            name="password"
             label="Contraseña"
             type="password"
             variant="outlined"
             fullWidth
+            onChange={formik.handleChange}
+            value={formik.values.password}
+            helperText= {formik.errors.password ? formik.errors.password : '(*) Campo obligatorio' }
+            error = {formik.errors.password ? true : false }
           />
+           <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        open={errorLogin}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message="Correo o contraseña incorrecta"
+        action={
+          <React.Fragment>
+            <Button color="secondary" size="small" onClick={handleClose}>
+              Cerrar
+            </Button>
+            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
+
+      
            <GoogleLogin
     clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
     buttonText="Iniciar con Google"
@@ -201,10 +292,11 @@ export default function MenuAppBar() {
           <Button onClick={handleClose2} color="primary">
             Cancelar
           </Button>
-          <Button onClick={handleClose2} variant="contained" color="secondary">
+          <Button type="submit" variant="contained" color="secondary">
             Iniciar Sessión
           </Button>
         </DialogActions>
+        </form>
       </Dialog>
 
       <Dialog open={openModalRegister} onClose={handleCloseRegister} aria-labelledby="form-dialog-title" fullScreen={fullScreen}>
